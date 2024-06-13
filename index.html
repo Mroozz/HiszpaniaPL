@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalendarz Wynajmu</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js"></script>
 </head>
 <body>
     <h1>Kalendarz Wynajmu</h1>
     <form id="rentalForm">
+        <label for="propertySelect">Wybierz nieruchomość:</label>
+        <select id="propertySelect" required>
+            <option value="" disabled selected>Wybierz nieruchomość</option>
+        </select>
+        
         <label for="startDate">Data początkowa:</label>
         <input type="date" id="startDate" required>
         
         <label for="endDate">Data końcowa:</label>
         <input type="date" id="endDate" required>
-        
-        <label for="dailyRate">Cena wynajmu za dzień (PLN):</label>
-        <input type="number" id="dailyRate" required>
 
         <button type="submit">Oblicz koszt</button>
     </form>
