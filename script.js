@@ -1,24 +1,13 @@
 // Firebase configuration
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBOdr5bDRwsZCXOjlX_TVXFNEnVA0w812Q",
-    authDomain: "esnieru.firebaseapp.com",
-    databaseURL: "https://esnieru-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "esnieru",
-    storageBucket: "esnieru.appspot.com",
-    messagingSenderId: "523836156102",
-    appId: "1:523836156102:web:5dc41e61790291edfa8fc7"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBOdr5bDRwsZCXOjlX_TVXFNEnVA0w812Q",
+  authDomain: "esnieru.firebaseapp.com",
+  databaseURL: "https://esnieru-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "esnieru",
+  storageBucket: "esnieru.appspot.com",
+  messagingSenderId: "523836156102",
+  appId: "1:523836156102:web:5dc41e61790291edfa8fc7"
+};
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -32,6 +21,7 @@ function loadProperties() {
     database.ref('properties').once('value', function(snapshot) {
         if (snapshot.exists()) {
             const properties = snapshot.val() || {};
+            console.log("Properties loaded: ", properties);  // Debugging line
             for (let key in properties) {
                 const option = document.createElement('option');
                 option.value = key;
@@ -72,35 +62,39 @@ document.getElementById('rentalForm').addEventListener('submit', function(event)
         // Sprawdź dostępność terminów
         database.ref('reservations').once('value', function(snapshot) {
             let reservations = snapshot.val() || [];
+            let isAvailable = true;
             for (let key in reservations) {
                 const reservation = reservations[key];
                 const resStartDate = new Date(reservation.startDate);
                 const resEndDate = new Date(reservation.endDate);
                 if ((startDate <= resEndDate && endDate >= resStartDate)) {
+                    isAvailable = false;
                     alert('Wybrane terminy są już zajęte.');
-                    return;
+                    break;
                 }
             }
 
-            // Oblicz liczbę dni wynajmu
-            const timeDiff = endDate - startDate;
-            const daysRented = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1;
+            if (isAvailable) {
+                // Oblicz liczbę dni wynajmu
+                const timeDiff = endDate - startDate;
+                const daysRented = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1;
 
-            // Oblicz całkowity koszt
-            const totalCost = daysRented * dailyRate;
+                // Oblicz całkowity koszt
+                const totalCost = daysRented * dailyRate;
 
-            // Zapisz rezerwację w Firebase
-            const newReservation = database.ref('reservations').push();
-            newReservation.set({
-                propertyKey: propertyKey,
-                startDate: startDate.toISOString(),
-                endDate: endDate.toISOString(),
-                totalCost: totalCost
-            });
+                // Zapisz rezerwację w Firebase
+                const newReservation = database.ref('reservations').push();
+                newReservation.set({
+                    propertyKey: propertyKey,
+                    startDate: startDate.toISOString(),
+                    endDate: endDate.toISOString(),
+                    totalCost: totalCost
+                });
 
-            // Wyświetl wynik
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = `Całkowity koszt wynajmu: ${totalCost.toFixed(2)} PLN za ${daysRented} dni.`;
+                // Wyświetl wynik
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `Całkowity koszt wynajmu: ${totalCost.toFixed(2)} PLN za ${daysRented} dni.`;
+            }
         });
     });
 });
