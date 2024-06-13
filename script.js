@@ -1,3 +1,17 @@
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBOdr5bDRwsZCXOjlX_TVXFNEnVA0w812Q",
+  authDomain: "esnieru.firebaseapp.com",
+  databaseURL: "https://esnieru-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "esnieru",
+  storageBucket: "esnieru.appspot.com",
+  messagingSenderId: "523836156102",
+  appId: "1:523836156102:web:5dc41e61790291edfa8fc7"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 // Get a reference to the database service
 const database = firebase.database();
 
@@ -5,13 +19,19 @@ const database = firebase.database();
 function loadProperties() {
     const propertySelect = document.getElementById('propertySelect');
     database.ref('properties').once('value', function(snapshot) {
-        const properties = snapshot.val() || {};
-        for (let key in properties) {
-            const option = document.createElement('option');
-            option.value = key;
-            option.textContent = properties[key].name + ' - ' + properties[key].dailyRate + ' PLN/dzień';
-            propertySelect.appendChild(option);
+        if (snapshot.exists()) {
+            const properties = snapshot.val() || {};
+            for (let key in properties) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = properties[key].name + ' - ' + properties[key].dailyRate + ' PLN/dzień';
+                propertySelect.appendChild(option);
+            }
+        } else {
+            console.error("No properties found in the database.");
         }
+    }).catch(function(error) {
+        console.error("Error fetching properties: ", error);
     });
 }
 
