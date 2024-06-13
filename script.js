@@ -1,4 +1,3 @@
-// Firebase configuration
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -9,11 +8,16 @@
   const firebaseConfig = {
     apiKey: "AIzaSyAj_uOIUAbi-4k-6oSL05HJIbh8RPJ4fhs",
     authDomain: "hiszpaniapl.firebaseapp.com",
+    databaseURL: "https://hiszpaniapl-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "hiszpaniapl",
     storageBucket: "hiszpaniapl.appspot.com",
     messagingSenderId: "145561262253",
-    appId: "1:145561262253:web:76ecb75e7bccd428d84e24"
+    appId: "1:145561262253:web:9334b4643fe5bf26d84e24"
   };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
