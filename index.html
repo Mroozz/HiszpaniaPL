@@ -7,25 +7,22 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Dodaj skrypty Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js"></script>   
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js"></script>
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+  apiKey: "AIzaSyBOdr5bDRwsZCXOjlX_TVXFNEnVA0w812Q",
+  authDomain: "esnieru.firebaseapp.com",
+  databaseURL: "https://esnieru-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "esnieru",
+  storageBucket: "esnieru.appspot.com",
+  messagingSenderId: "523836156102",
+  appId: "1:523836156102:web:5dc41e61790291edfa8fc7"
+};
         
-    <script type="module">
-  
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyBOdr5bDRwsZCXOjlX_TVXFNEnVA0w812Q",
-    authDomain: "esnieru.firebaseapp.com",
-    databaseURL: "https://esnieru-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "esnieru",
-    storageBucket: "esnieru.appspot.com",
-    messagingSenderId: "523836156102",
-    appId: "1:523836156102:web:5dc41e61790291edfa8fc7"
-  };
-
-  const app = initializeApp(firebaseConfig);
-</script>
-    
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 </head>
 <body>
     <h1>Kalendarz Wynajmu</h1>
