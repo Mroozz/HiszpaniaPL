@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supabase Property Reservations</title>
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/main.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="properties.js" defer></script>
     <script src="reservations.js" defer></script>
@@ -25,12 +27,17 @@
         .property {
             margin-bottom: 20px;
         }
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Supabase Property Reservations</h1>
         <div id="properties"></div>
+        <div id="calendar"></div>
     </div>
 </body>
 </html>
