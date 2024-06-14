@@ -1,33 +1,36 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kalendarz Wynajmu</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Dodaj skrypty Firebase -->
+    <title>Supabase and GitHub Pages</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    
-    <script type="module" src="script.js"></script>
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
 </head>
 <body>
-    <h1>Kalendarz Wynajmu</h1>
-    <form id="rentalForm">
-        <label for="propertySelect">Wybierz nieruchomość:</label>
-        <select id="propertySelect" required>
-            <option value="" disabled selected>Wybierz nieruchomość</option>
-        </select>
-        
-        <label for="startDate">Data początkowa:</label>
-        <input type="date" id="startDate" required>
-        
-        <label for="endDate">Data końcowa:</label>
-        <input type="date" id="endDate" required>
-
-        <button type="submit">Oblicz koszt</button>
-    </form>
-
-    <div id="result"></div>
+    <div class="container">
+        <h1>Supabase with GitHub Pages</h1>
+        <div id="data">Loading data...</div>
+    </div>
 </body>
 </html>
-
