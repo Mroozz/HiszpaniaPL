@@ -61,6 +61,8 @@
             const startDate = new Date(document.getElementById('startDate').value);
             const endDate = new Date(document.getElementById('endDate').value);
 
+            console.log("Form submitted with:", { propertyKey, startDate, endDate });
+
             // Sprawdź, czy daty są poprawne
             if (startDate > endDate) {
                 alert('Data początkowa nie może być późniejsza niż data końcowa.');
@@ -71,14 +73,22 @@
             const propertyRef = ref(database, 'properties/' + propertyKey);
             try {
                 const propertySnapshot = await get(propertyRef);
+                if (!propertySnapshot.exists()) {
+                    console.error("Property not found in the database.");
+                    return;
+                }
                 const property = propertySnapshot.val();
                 const dailyRate = property.dailyRate;
+
+                console.log("Property fetched: ", property);
 
                 // Sprawdź dostępność terminów
                 const reservationsRef = ref(database, 'reservations');
                 const reservationsSnapshot = await get(reservationsRef);
-                const reservations = reservationsSnapshot.val() || [];
+                const reservations = reservationsSnapshot.val() || {};
                 let isAvailable = true;
+
+                console.log("Reservations fetched: ", reservations);
 
                 for (let key in reservations) {
                     const reservation = reservations[key];
@@ -99,6 +109,8 @@
                     // Oblicz całkowity koszt
                     const totalCost = daysRented * dailyRate;
 
+                    console.log("Total cost calculated: ", totalCost);
+
                     // Zapisz rezerwację w Firebase
                     const newReservationRef = push(child(ref(database), 'reservations'));
                     await set(newReservationRef, {
@@ -107,6 +119,8 @@
                         endDate: endDate.toISOString().split('T')[0], // Trzymaj tylko datę
                         totalCost: totalCost
                     });
+
+                    console.log("Reservation saved successfully.");
 
                     // Wyświetl wynik
                     const resultDiv = document.getElementById('result');
