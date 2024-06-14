@@ -31,7 +31,7 @@ function displayProperties(properties) {
         propertyDiv.innerHTML = `
             <h2>${property.name}</h2>
             <p>Price per day: $${property.price_per_day}</p>
-            <button onclick="makeReservation(${property.id})">Reserve</button>
+            <button onclick="showCalendar(${property.id}, '${property.name}')">View Calendar</button>
         `;
         propertiesDiv.appendChild(propertyDiv);
     });
