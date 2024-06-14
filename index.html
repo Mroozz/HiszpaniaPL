@@ -104,7 +104,7 @@
                 if (isAvailable) {
                     // Oblicz liczbę dni wynajmu
                     const timeDiff = endDate - startDate;
-                    const daysRented = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                    const daysRented = Math.ceil(timeDiff / (1000 * 60 * 60 * 24)) + 1;
 
                     // Oblicz całkowity koszt
                     const totalCost = daysRented * dailyRate;
