@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supabase and GitHub Pages</title>
+    <title>Supabase Property Reservations</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="script.js" defer></script>
+    <script src="properties.js" defer></script>
+    <script src="reservations.js" defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,16 +22,15 @@
         h1 {
             text-align: center;
         }
-        pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
+        .property {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Supabase with GitHub Pages</h1>
-        <div id="data">Loading data...</div>
+        <h1>Supabase Property Reservations</h1>
+        <div id="properties"></div>
     </div>
 </body>
 </html>
